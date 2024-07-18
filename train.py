@@ -114,6 +114,10 @@ except Exception as e:
 # Train model
 try:
     trainer.train()
+except KeyboardInterrupt:
+    print("Training interrupted by user")
+    trainer.model.save_pretrained(new_model + "-last")
+    sys.exit(1)
 except Exception as e:
     trainer.model.save_pretrained(new_model + "-error")
     print(f"Error during training: {e}")
